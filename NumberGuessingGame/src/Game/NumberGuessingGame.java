@@ -1,9 +1,17 @@
+package Game;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
-    public void startGame(int attempts, int round ,int score, int generatedNumber) {
+    private int attempts;
+    private int round;
+    private int score;
+    private int generatedNumber;
+
+    public Action startGame(int attempts, int round , int score, int generatedNumber) {
         Random random = new Random();
         ArrayList<String> celebrationText = new ArrayList<>();
         celebrationText.add("Brilliant, amazing stuff!");
@@ -20,19 +28,26 @@ public class NumberGuessingGame {
             int guess = scanner.nextInt();
             if (guess == generatedNumber) {
                 System.out.println(celebrationText.get((random.nextInt(0, celebrationText.size()))));
+                setAttempts(attempts);
                 if (attempts == 1) {
                     score += 3;
+                    setScore(score);
                     round++;
+                    setRound(round);
                 } else if (attempts == 2) {
                     score += 2;
+                    setScore(score);
                     round++;
+                    setRound(round);
                 } else {
                     score += 1;
+                    setScore(score);
                     round++;
+                    setRound(round);
                 }
                 if (score > 0) {
-                    System.out.println("Round " + round);
-                    System.out.println("Score " + score);
+                    System.out.println("Round " + getRound());
+                    System.out.println("Score " + getScore());
                     startGame(attempts, round, score, generatedNumber);
                 }
             } else if (guess > generatedNumber) {
@@ -56,6 +71,40 @@ public class NumberGuessingGame {
 
         }
 
+
+        return null;
+    }
+
+    public int getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getGeneratedNumber() {
+        return generatedNumber;
+    }
+
+    public void setGeneratedNumber(int generatedNumber) {
+        this.generatedNumber = generatedNumber;
     }
 //    private void playAgain() {
 //        Random random = new Random();

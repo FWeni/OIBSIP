@@ -1,0 +1,20 @@
+[
+  {
+    "name" : "John",
+    "lastName" : "Doe",
+    "username" : "JohnD2",
+    "privatePin" : "2222"
+  },
+  {
+    "name" : "Jane",
+    "lastName" : "Doe",
+    "username" : "Jannie147",
+    "privatePin" : "2903"
+  },
+  {
+    "name" : "Anne",
+    "lastName" : "Mary",
+    "username" : "Mary44",
+    "privatePin" : "1233"
+  }
+]
