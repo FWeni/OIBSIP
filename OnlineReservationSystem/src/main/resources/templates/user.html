@@ -12,23 +12,18 @@
 <body>
 <header>
     <nav class="top-section">
-        <img class="appLogo" src="../html/assets/Designer.jpeg" alt="webApp logo">
-        <h1>Online Reservation</h1>
-        <span id="location">
-            <!-- <img th:src="${ui.areaImg}" alt="location"> -->
-            <img class="pin" src="../html/assets/south-africa.png" alt="location">
-
-        </span>
-        <div>
-            <button id="drop-down" th:text="${user.name[0]}"><b>U</b></button>
-            <div>
-                <a href="#">Profile</a>
-                <a href="#">Link</a>
-                <a href="#">History</a>
-            </div>
-
-        </div>
-
+        <ul class="dropdown">
+            <li><img src="../html/assets/trainlogoNotext.png" alt="webAppLogo"></li>
+            <li><img src="../html/assets/south-africa.png" alt="ZA"></li>
+            <li>
+                <button>T</button>
+                <div class="dropdown-content">
+                    <a href="#">Manage Profile</a>
+                    <a href="#">History</a>
+                    <a href="#">Settings</a>
+                </div>
+            </li>
+        </ul>
     </nav>
 </header>
 <main>

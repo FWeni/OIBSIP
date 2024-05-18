@@ -72,10 +72,13 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
-body {
+* {
     margin: 0;
     padding: 0;
+}
 
+body {
+    min-height: 100vh;
     background-color: #f1fefe;
 }
 
@@ -110,10 +113,33 @@ body {
 }
 
 .top-section {
-    grid-column-start: 1;
-    grid-row-start: 1;
     background-color: #23667b;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 
+}
+
+.top-section ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.top-section li {
+    height: 60px;
+}
+.top-section a {
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    color: #f1fefe;
+}
+.top-section a:hover {
+    background-color: #9dcdca;
+}
+.top-section li:first-child {
+    margin-right: auto;
 }
 .top-section h1{
     animation: fadeText 5s ease-in-out 2s infinite;
@@ -129,24 +155,51 @@ body {
     to {opacity: 1;}
   }
 .top-section img {
-    height: 3.125rem;
-    width: 3.125rem;
+    height: 3.5rem;
+    width: 3.5rem;
     border-radius: 50%;
+    padding: 10px;
 
 }
 .top-section button {
-    height: 3.125rem;
-    width: 3.125rem;
+    height: 2.5rem;
+    width: 2.5rem;
     border-radius: 50%;
-    grid-column-start: 6;
-    grid-column-end: 7;
-    grid-row: 1;
-
-
+    color: black;
+    font-weight: bolder;
+    background-color:#9dcdca;
+    margin-top: 10px;
+    margin-right: 30px;
 }
 
 .top-section button:hover {
     background-color: #f1fefe;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    box-shadow: 0 8px, 16px 0 rgba(0, 0, 0, 0.2);
+    min-width: 100rem;
+    position: absolute;
+    background-color:#f1fefe;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #9dcdca;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .booking-section {
