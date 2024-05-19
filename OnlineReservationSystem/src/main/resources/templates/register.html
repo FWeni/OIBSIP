@@ -5,7 +5,7 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title th:title="${title}"></title>
+    <title th:text="${title}"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,7 +19,7 @@
     <div class="registration-card">
         <img th:src="${imgSrc}" alt="webApp logo">
         <h1>Registration</h1>
-        <form method="post" action="" id="registration_form">
+        <form method="post" action="/register" id="registration_form">
             <input class="input-box" type="text" id="first_name" name="first_name" placeholder="Name" autofocus required> <br>
             <input class="input-box" type="text" id="last_name" name="last_name" placeholder="Last Name" autofocus required> <br>
             <input class="input-box" type="date" id="birth_date" name="birth_date" autofocus required><br>
@@ -40,6 +40,6 @@
     </div>
 </main>
 <footer></footer>
-<script src="./js/index.js"></script>
+<script src="../js/index.js"></script>
 </body>
 </html>

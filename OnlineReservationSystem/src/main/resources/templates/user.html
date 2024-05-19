@@ -1,39 +1,122 @@
 <!DOCTYPE html>
 <html
-        xmlns:th="http://www.thymeleaf.org"
         lang="en"
+        xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>User</title>
-    <link rel="stylesheet" th:href="${ui.style}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="${style}">
     <link rel="stylesheet" href="../html/css/style.css">
 </head>
 <body>
 <header>
     <nav class="top-section">
         <ul class="dropdown">
-            <li><img src="../html/assets/trainlogoNotext.png" alt="webAppLogo"></li>
-            <li><img src="../html/assets/south-africa.png" alt="ZA"></li>
+            <li><img th:src="${navLogo}" alt="webAppLogo"></li>
             <li>
-                <button>T</button>
+                <button id="dropdown-btn"></button>
                 <div class="dropdown-content">
-                    <a href="#">Manage Profile</a>
+                    <a href="#">Profile</a>
                     <a href="#">History</a>
                     <a href="#">Settings</a>
                 </div>
             </li>
+            <li><img th:src="${areaImg}" alt="ZA"></li>
         </ul>
+        <h1>Online Train Trip Booking.</h1>
     </nav>
 </header>
 <main>
     <div>
-        <section class="booking-section">
-            <input type="text" name="depart-station" id="depart-station" placeholder="Departure">
-            <input type="text" name="destination" id="destination" placeholder="Destination">
-            <input type="date" name="date-of-depart">
-            <input type="submit" name="check-availability">
-        </section>
+        <!-- <section class="booking-section">
+            <input class="d-part" type="text" name="depart-station" id="depart-station" placeholder="Departure">
+            <input class="dest" type="text" name="destination" id="destination" placeholder="Destination">
+            <input class="date" type="date" name="date-of-depart">
+            <input class="checking" type="submit" name="check-availability">
+        </section> -->
+        <button class="book" onclick="formPopUp()">
+            Book Now!
+        </button>
+        <div  class="book-card" id="formPopup">
+            <img th:src="${ui.navLogo}" alt="webApp logo">
+            <h1>Book A Train Ride</h1>
+            <form action="" method="post">
+                <!-- <label for="departure">Departure</label> <br> -->
+                <div class="form-row1">
+                    <select class="d-part col" id="departure">
+                        <option value="selected"> Departure</option>
+                        <optgroup label="Johannesburg">
+                            <option value="MID"> Midrand </option>
+                            <option value="JHB"> JHB Park station</option>
+                            <option value="ORL"> Orlando </option>
+                            <option value="RSB"> Rosebank station</option>
+                        </optgroup>
+                        <optgroup label="Pretoria">
+                            <option value="MBP"> Mabopane</option>
+                            <option value="PTA"> Pretoria station</option>
+                        </optgroup>
+                        <optgroup label="KwaZulu-Natal">
+                            <option value="BLN"> Ballito Junction</option>
+                            <option value="GWS"> Gateway station</option>
+                        </optgroup>
+                        <optgroup label="Western Cape">
+                            <option value="CCK"> Canal Walk</option>
+                            <option value="TVS"> Tyger Valley Station</option>
+                        </optgroup>
+                        <optgroup label="Bloemfontein">
+                            <option value="LOW"> Loch Logan Waterfront</option>
+                            <option value="LVF"> Lowveld Festival</option>
+                        </optgroup>
+                        <optgroup label="Nelspruit">
+                            <option value="NS"> i'langa Station</option>
+                        </optgroup>
+                        <optgroup label="Eastern Cape">
+                            <option value="WPE"> Walmer Park Station</option>
+                        </optgroup>
+                    </select> <br>
+                    <!-- <label for="destination">Destination</label> <br> -->
+                    <select class="dest col" id="destination">
+                        <option value="selected"> Destination</option>
+                        <optgroup label="Johannesburg">
+                            <option value="MID"> Midrand </option>
+                            <option value="JHB"> JHB Park station</option>
+                            <option value="ORL"> Orlando </option>
+                            <option value="RSB"> Rosebank station</option>
+                        </optgroup>
+                        <optgroup label="Pretoria">
+                            <option value="MBP"> Mabopane</option>
+                            <option value="PTA"> Pretoria station</option>
+                        </optgroup>
+                        <optgroup label="KwaZulu-Natal">
+                            <option value="BLN"> Ballito Junction</option>
+                            <option value="GWS"> Gateway station</option>
+                        </optgroup>
+                        <optgroup label="Western Cape">
+                            <option value="CCK"> Canal Walk</option>
+                            <option value="TVS"> Tyger Valley Station</option>
+                        </optgroup>
+                        <optgroup label="Bloemfontein">
+                            <option value="LOW"> Loch Logan Waterfront</option>
+                            <option value="LVF"> Lowveld Festival</option>
+                        </optgroup>
+                        <optgroup label="Nelspruit">
+                            <option value="NS"> i'langa Station</option>
+                        </optgroup>
+                        <optgroup label="Eastern Cape">
+                            <option value="WPE"> Walmer Park Station</option>
+                        </optgroup>
+                    </select> <br>
+                </div>
+                <input type="date" id="dateOfDeparture" name="dateOfDeparture" value=""><br>
+                <input type="time" id="timeOfDeparture" name="timeOfDeparture" value=""> <br>
+                <input type="time" id="cost" name="cost" value=""> <br> <br>
+                <button>Book</button>
+            </form>
+        </div> 
+    </div>
+
         <section class="trips-section">
             <h2>Trips</h2>
             <div class="row">
@@ -55,139 +138,11 @@
                 </div>
             </div>
         </section>
-        <!-- <div id="user-details">
-            <div id="first-name">Boo</div>
-            <div id="last-name"></div>
-            <div id="email"></div>
-        </div>
-        <h1>User details</h1> -->
-<!--        <div>-->
-<!--            <div class="popUpForm">-->
-<!--                <button  class="book-btn" onclick="formPopUp()">-->
-<!--                    Booking-->
-<!--                </button>-->
-<!--                <div  class="book-card" id="formPopup">-->
-<!--                    <img src="../html/assets/trainlogoNotext.png" alt="webApp logo">-->
-<!--                    <h1>Book A Train Ride</h1>-->
-<!--                    <form action="" method="post">-->
-<!--                        <label for="departure">Departure</label> <br>-->
-<!--                        <select id="departure">-->
-<!--                            <option value="selected"> Departure</option>-->
-<!--                            <optgroup label="Johannesburg">-->
-<!--                                <option value="MID"> Midrand </option>-->
-<!--                                <option value="JHB"> JHB Park station</option>-->
-<!--                                <option value="ORL"> Orlando </option>-->
-<!--                                <option value="RSB"> Rosebank station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Pretoria">-->
-<!--                                <option value="MBP"> Mabopane</option>-->
-<!--                                <option value="PTA"> Pretoria station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="KwaZulu-Natal">-->
-<!--                                <option value="BLN"> Ballito Junction</option>-->
-<!--                                <option value="GWS"> Gateway station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Western Cape">-->
-<!--                                <option value="CCK"> Canal Walk</option>-->
-<!--                                <option value="TVS"> Tyger Valley Station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Bloemfontein">-->
-<!--                                <option value="LOW"> Loch Logan Waterfront</option>-->
-<!--                                <option value="LVF"> Lowveld Festival</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Nelspruit">-->
-<!--                                <option value="NS"> i'langa Station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Eastern Cape">-->
-<!--                                <option value="WPE"> Walmer Park Station</option>-->
-<!--                            </optgroup>-->
-<!--                        </select> <br>-->
-<!--                        <label for="destination">Destination</label> <br>-->
-<!--                        <select id="destination">-->
-<!--                            <option value="selected"> Destination</option>-->
-<!--                            <optgroup label="Johannesburg">-->
-<!--                                <option value="MID"> Midrand </option>-->
-<!--                                <option value="JHB"> JHB Park station</option>-->
-<!--                                <option value="ORL"> Orlando </option>-->
-<!--                                <option value="RSB"> Rosebank station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Pretoria">-->
-<!--                                <option value="MBP"> Mabopane</option>-->
-<!--                                <option value="PTA"> Pretoria station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="KwaZulu-Natal">-->
-<!--                                <option value="BLN"> Ballito Junction</option>-->
-<!--                                <option value="GWS"> Gateway station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Western Cape">-->
-<!--                                <option value="CCK"> Canal Walk</option>-->
-<!--                                <option value="TVS"> Tyger Valley Station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Bloemfontein">-->
-<!--                                <option value="LOW"> Loch Logan Waterfront</option>-->
-<!--                                <option value="LVF"> Lowveld Festival</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Nelspruit">-->
-<!--                                <option value="NS"> i'langa Station</option>-->
-<!--                            </optgroup>-->
-<!--                            <optgroup label="Eastern Cape">-->
-<!--                                <option value="WPE"> Walmer Park Station</option>-->
-<!--                            </optgroup>-->
-<!--                        </select> <br>-->
-<!--                        <label for="dateOfDeparture">Date Of Departure</label> <br>-->
-<!--                        <input type="date" id="dateOfDeparture" name="dateOfDeparture" value=""><br>-->
-<!--                        <label for="timeOfDeparture">Time Of Departure</label> <br>-->
-<!--                        <input type="time" id="timeOfDeparture" name="timeOfDeparture" value=""> <br>-->
-<!--                        <label for="cost">Cost</label> <br>-->
-<!--                        <input type="time" id="cost" name="cost" value=""> <br> <br>-->
-<!--                        <button>Book</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="popUpForm">-->
-<!--                <button class="cancel-btn" onclick="cancelFormPopup()">Cancel Booking</button>-->
-<!--                <div  class="cancel-card" id="cancelFormPopup">-->
-<!--                    <img src="../html/assets/trainlogoNotext.png" alt="webApp logo">-->
-<!--                    <h1>Cancel A Train Ride</h1>-->
-<!--                    <div>-->
-<!--                        <p>Ticket Code <b>value</b></p>-->
-<!--                        <p>Departure <b>value</b></p>-->
-<!--                        <p>Destination <b>value</b></p>-->
-<!--                        <p>Date <b>value</b></p>-->
-<!--                        <p>Time <b>value</b></p>-->
-<!--                        <p>Refund <b>value</b></p>-->
-<!--                        <button>Cancel</button>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--        <div>-->
-<!--            <table class="bookings">-->
-<!--                <thead>Booked</thead>-->
-<!--                <tbody>-->
-<!--                    <td>some data</td>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--            <table class="cancelling">-->
-<!--                <thead>Cancelled</thead>-->
-<!--                <tbody>-->
-<!--                    <td>some data</td>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--            <table class="history">-->
-<!--                <thead>History</thead>-->
-<!--                <tbody>-->
-<!--                    <td>some data</td>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
     </div>
 </main>
 <footer></footer>
-<!-- <script src="../html/js/form-popup.js"></script> -->
-<script src="../html/js/index.js"></script>
+<script th:src="${user-js}"></script>
+<script th:src="${index-js}"></script>
 
 </body>
 </html>

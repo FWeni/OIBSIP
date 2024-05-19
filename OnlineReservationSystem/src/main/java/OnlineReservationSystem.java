@@ -1,15 +1,9 @@
-import com.google.gson.JsonObject;
 import controller.register.UserRegistrationAPIController;
 import controller.register.UserRegistrationController;
 import controller.user.UserController;
 
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import util.JsonUtil;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static controller.register.UserRegistrationAPIController.registrationSuccess;
 import static controller.register.UserRegistrationController.ROOT_PATH;
@@ -25,12 +19,12 @@ public class OnlineReservationSystem {
 //            configureThymeleafTemplates();
             landingPage();
             UserRegistrationController.renderRegistrationPage();
+            registerUser();
+            UserController.renderUserHomePage();
 //            registrationPage();
 //            get(UserRegistrationController.REGISTER, (req , res) -> new ThymeleafTemplateEngine().render(new ModelAndView(Map.of("title","Online Reservation"),"register")));
-            registerUser();
-            homePage();
+//            homePage();
 //            UserController.renderHomepage();
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -61,11 +55,15 @@ public class OnlineReservationSystem {
     private static void registerUser() {
         post(UserRegistrationAPIController.API_PATH, (req, res) -> {
             String regOutput = UserRegistrationAPIController.register(req.body());
+
+//            System.out.println(UserController.getUser(res.body()));
             if(!registrationSuccess){
                 res.status(400);
+                System.out.println("can you see me.");
                 res.redirect(UserRegistrationController.REGISTER);
             } else {
                 res.status(200);
+                System.out.println("can you see me too.");
                 res.redirect(UserController.HOME_PATH);
             }
             res.type("application/json");
@@ -104,10 +102,8 @@ public class OnlineReservationSystem {
 //        });
     }
     private static void homePage() {
-        get(UserController.HOME_PATH,(req,res)->{
-            UserController.renderHomepage();
-            return "";
-        });
+        get(UserController.HOME_PATH, (req,res) -> "hello");
+//        get(UserController.USER_API,(req, res) -> UserController.getUser(req.body()));
     }
 
 }

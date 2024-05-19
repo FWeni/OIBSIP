@@ -3,14 +3,13 @@ package controller.user;
 import app.db.UseDaoImplementation;
 import app.db.model.User;
 
-
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
+import controller.register.UserRegistrationAPIController;
 import org.json.JSONObject;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import util.JsonUtil;
-import util.TemplateRender;
-import util.UserPasswordEncryption;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,71 +23,82 @@ public class UserController {
     public static final String BOOK_TRIP = "/booking";
     public static final String CANCEL_TRIP = "/cancel";
 
-    UseDaoImplementation us = new UseDaoImplementation();
-    UserPasswordEncryption encrypt = new UserPasswordEncryption();
-    String incomingData;
-    JSONObject jsonObject;
-    String apiResponse;
+    static JSONObject jsonObject;
+    static UseDaoImplementation userDao;
+    static ObjectMapper mapper = new ObjectMapper();
+
+    public static String userFromDB() {
+        Map<String,Object> userDetails = new HashMap<>();
+        get(USER_API, (req, res) -> {
+
+           List<User> allCurrentUsers = userDao.getAllUsers();
+           System.out.println(allCurrentUsers);
+
+           Map map = mapper.readValue(req.body(), Map.class);
+
+           String submittedPsw = (String) map.get("password");
+           String submittedEmail = (String) map.get("email");
 
 
-    public static void renderHomepage() {
-       get(HOME_PATH, (req, res) ->
-               new ThymeleafTemplateEngine()
-                       .render(new ModelAndView
-                               (makeViewModel(),"user.html")
-                       ));
+           Map<String,Object> serverRes = new HashMap<>();
+
+           String userFound = "";
+
+           for (User user: allCurrentUsers) {
+               Map userMapping = mapper.readValue(user.toString(),Map.class);
+//               jsonObject = new JSONObject(user);
+
+//               String existingPsw = jsonObject.getString("password");
+//               String existingEmail = jsonObject.getString("email");
+               String existingEmail = (String) userMapping.get("email");
+               String existingPsw = (String) userMapping.get("password");
+               int userId;
+
+               if (existingEmail.equals(submittedEmail) && existingPsw.equals(submittedPsw)) {
+//                   userId = jsonObject.getInt("id");
+                   userId = (int) userMapping.get("id");
+                   userFound = JsonUtil.toJson(userDao.getUserById(userId));
+                   res.status(200);
+                   serverRes.put("message","User found.");
+               } else {
+                   res.status(402);
+                   serverRes.put("message","User not found.");
+               }
+           }
+//           jsonObject = new JSONObject(userFound);
+//           System.out.println(jsonObject.getString("name"));
+//           userDetails.put("name", jsonObject.getString("name"));
+//           userDetails.put("lastname", jsonObject.getString("lastname"));
+//           userDetails.put("gender", jsonObject.getString("gender"));
+//           userDetails.put("email", jsonObject.getString("email"));
+//           userDetails.put("dob", jsonObject.getString("birthdate"));
+            Map mapData = mapper.readValue(userFound,Map.class);
+            System.out.println(mapData.get("name"));
+            userDetails.put("name", mapData.get("name"));
+            userDetails.put("lastname", mapData.get("lastname"));
+            userDetails.put("gender", mapData.get("gender"));
+            userDetails.put("email", mapData.get("email"));
+            userDetails.put("dob", mapData.get("birthdate"));
+            return JsonUtil.toJson(serverRes);
+       });
+       return JsonUtil.toJson(userDetails);
     }
     public static Map<String, Object> makeViewModel() {
-        User user = new User();
-
-        Map<String,Object> viewModel = new HashMap<>();
-        Map<String,Object> userDetails = new HashMap<>();
-        Map<String,Object> userInterface = new HashMap<>();
-
-        userDetails.put("name",user.getFirstName());
-        userDetails.put("lastname",user.getLastName());
-        userDetails.put("birthdate", user.getBirthDate());
-        userDetails.put("gender",user.getGender());
-        userDetails.put("email", user.getEmail());
-        userInterface.put("areaImg","/assets/south-africa.png");
-        userInterface.put("style","/css/style.css");
-        userInterface.put("js","/js/index.js");
-        viewModel.put("user", userDetails);
-        viewModel.put("ui",userInterface);
-        System.out.println(viewModel);
-        return viewModel;
+        return Map.of(
+                "areaImg","/assets/south-africa.png",
+                "navLogo","/assets/trainlogoNotext.png",
+                "style","/css/style.css",
+                "user-js", "/js/user.js",
+                "index-js","/js/index.js");
     }
 
-    private void getUser() {
-        get(USER_API, (req,res) -> {
-            incomingData = req.body();
-            jsonObject = new JSONObject(incomingData);
-
-            List<User> allUsers = us.getAllUsers();
-
-
-            String providedPsw = jsonObject.getString("password");
-            String providedEmail = jsonObject.getString("email");
-
-            for (User obj : allUsers) {
-                jsonObject = new JSONObject(obj);
-                String oneUserEmail = jsonObject.getString("email");
-                String psw = jsonObject.getString("password");
-
-                int userId = obj.getId();
-
-                if (oneUserEmail.equals(providedEmail) && psw.equals(encrypt.passwordEncryption(providedPsw))) {
-                    res.status(200);
-                    apiResponse = String.valueOf(us.getUserById(userId));
-                } else {
-                    res.status(400);
-                    apiResponse = "Incorrect user email or password";
-                }
-
-            }
-            return apiResponse;
-        });
+    public static void renderUserHomePage() {
+        get(HOME_PATH, (req , res) -> new ThymeleafTemplateEngine()
+                .render(new ModelAndView(
+                        makeViewModel(),
+                        "user.html")));
     }
+
 //
 //    public void getUsers() {
 //        get("api/users", (req,res) -> {
