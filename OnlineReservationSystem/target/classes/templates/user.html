@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="${style}">
+    <link rel="stylesheet" href="../html/css/style.css">
+</head>
+<body>
+<header>
+    <nav class="top-section">
+        <ul class="dropdown">
+            <li><img th:src="${navLogo}" alt="webAppLogo"></li>
+            <li>
+                <button id="dropdown-btn"></button>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">History</a>
+                    <a href="#">Settings</a>
+                </div>
+            </li>
+            <li><img th:src="${areaImg}" alt="ZA"></li>
+        </ul>
+        <h1>Online Train Trip Booking.</h1>
+    </nav>
+</header>
+<main>
+    <div>
+        <!-- <section class="booking-section">
+            <input class="d-part" type="text" name="depart-station" id="depart-station" placeholder="Departure">
+            <input class="dest" type="text" name="destination" id="destination" placeholder="Destination">
+            <input class="date" type="date" name="date-of-depart">
+            <input class="checking" type="submit" name="check-availability">
+        </section> -->
+        <button class="book" onclick="formPopUp()">
+            Book Now!
+        </button>
+        <div  class="book-card" id="formPopup">
+            <img th:src="${ui.navLogo}" alt="webApp logo">
+            <h1>Book A Train Ride</h1>
+            <form action="" method="post">
+                <!-- <label for="departure">Departure</label> <br> -->
+                <div class="form-row1">
+                    <select class="d-part col" id="departure">
+                        <option value="selected"> Departure</option>
+                        <optgroup label="Johannesburg">
+                            <option value="MID"> Midrand </option>
+                            <option value="JHB"> JHB Park station</option>
+                            <option value="ORL"> Orlando </option>
+                            <option value="RSB"> Rosebank station</option>
+                        </optgroup>
+                        <optgroup label="Pretoria">
+                            <option value="MBP"> Mabopane</option>
+                            <option value="PTA"> Pretoria station</option>
+                        </optgroup>
+                        <optgroup label="KwaZulu-Natal">
+                            <option value="BLN"> Ballito Junction</option>
+                            <option value="GWS"> Gateway station</option>
+                        </optgroup>
+                        <optgroup label="Western Cape">
+                            <option value="CCK"> Canal Walk</option>
+                            <option value="TVS"> Tyger Valley Station</option>
+                        </optgroup>
+                        <optgroup label="Bloemfontein">
+                            <option value="LOW"> Loch Logan Waterfront</option>
+                            <option value="LVF"> Lowveld Festival</option>
+                        </optgroup>
+                        <optgroup label="Nelspruit">
+                            <option value="NS"> i'langa Station</option>
+                        </optgroup>
+                        <optgroup label="Eastern Cape">
+                            <option value="WPE"> Walmer Park Station</option>
+                        </optgroup>
+                    </select> <br>
+                    <!-- <label for="destination">Destination</label> <br> -->
+                    <select class="dest col" id="destination">
+                        <option value="selected"> Destination</option>
+                        <optgroup label="Johannesburg">
+                            <option value="MID"> Midrand </option>
+                            <option value="JHB"> JHB Park station</option>
+                            <option value="ORL"> Orlando </option>
+                            <option value="RSB"> Rosebank station</option>
+                        </optgroup>
+                        <optgroup label="Pretoria">
+                            <option value="MBP"> Mabopane</option>
+                            <option value="PTA"> Pretoria station</option>
+                        </optgroup>
+                        <optgroup label="KwaZulu-Natal">
+                            <option value="BLN"> Ballito Junction</option>
+                            <option value="GWS"> Gateway station</option>
+                        </optgroup>
+                        <optgroup label="Western Cape">
+                            <option value="CCK"> Canal Walk</option>
+                            <option value="TVS"> Tyger Valley Station</option>
+                        </optgroup>
+                        <optgroup label="Bloemfontein">
+                            <option value="LOW"> Loch Logan Waterfront</option>
+                            <option value="LVF"> Lowveld Festival</option>
+                        </optgroup>
+                        <optgroup label="Nelspruit">
+                            <option value="NS"> i'langa Station</option>
+                        </optgroup>
+                        <optgroup label="Eastern Cape">
+                            <option value="WPE"> Walmer Park Station</option>
+                        </optgroup>
+                    </select> <br>
+                </div>
+                <input type="date" id="dateOfDeparture" name="dateOfDeparture" value=""><br>
+                <input type="time" id="timeOfDeparture" name="timeOfDeparture" value=""> <br>
+                <input type="time" id="cost" name="cost" value=""> <br> <br>
+                <button>Book</button>
+            </form>
+        </div> 
+    </div>
+
+        <section class="trips-section">
+            <h2>Trips</h2>
+            <div class="row">
+                <a href="javascript:void(0)" onclick="openTab(event,'Booked');">
+                    <div class="tab-links">
+                        Booked
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openTab(event,'Cancelled');">
+                    <div class="tab-links">
+                        Cancelled
+                    </div>
+                </a>
+            </div>
+            <div class="tab-content">
+                <div class="">
+                    <h3>London</h3>
+                    <p>Display departure and est arrival times.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<footer></footer>
+<script th:src="${user-js}"></script>
+<script th:src="${index-js}"></script>
+
+</body>
+</html>

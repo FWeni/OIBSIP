@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+<head>
+    <meta charset="UTF-8">
+    <title th:title="${title}"></title>
+    <link rel="stylesheet" href="css/styleLanding.css">
+</head>
+<body>
+<header></header>
+<main>
+    <div id="navBar" class="topNavBar">
+        <span class="appLogo">
+            <img src="./assets/NavBarLogo.jpeg" alt="webLogo">
+        </span>
+        <span class="theNav">
+            <a href="/"></a>
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+            <a href="/about">About</a>
+                <!--        <a href="/book">Book</a>-->
+                <!--        <a href="/cancel">Cancel</a>-->
+                <!--        <a href="/history">History</a>-->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </span>
+    </div>
+    <div class="center-text">
+        <h1>Book Your Train Ticket Now!!</h1>
+        <h2>This is an online train reservation system..</h2>
+    </div>
+    <div class="slide-container">
+        <div class="slides fade">
+            <div class="imgNum">1 / 5</div>
+            <img src="./assets/attractions/centralDrakensburg.jpg" style="width:100%">
+            <div class="imgText">Central Drakenburg</div>
+        </div>
+        <div class="slides fade">
+            <div class="imgNum">2 / 5</div>
+            <img src="assets/attractions/KrugerNationalPark.jpg" style="width:100%">
+            <div class="imgText">Kruger National Park</div>
+        </div>
+        <div class="slides fade">
+            <div class="imgNum">3 / 5</div>
+            <img src="./assets/attractions/nothernCape.jpg" style="width:100%">
+            <div class="imgText">Northern Cape</div>
+        </div>
+        <div class="slides fade">
+            <div class="imgNum">4 / 5</div>
+            <img src="./assets/attractions/RobbenIsland.jpg" style="width:100%">
+            <div class="imgText">Robben Island</div>
+        </div>
+        <div class="slides fade">
+            <div class="imgNum">5 / 5</div>
+            <img src="./assets/attractions/theNelsonMandelaBridge.jpg" style="width:100%">
+            <div class="imgText">Nelson Mandela Bridge</div>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="socials">
+        <a href="#x"><img src="./assets/twitter.png" alt="X"></a>
+        <a href="#ig"><img src="./assets/instagram.png" alt="IG"></a>
+        <a href="#whatsapp"><img src="./assets/whatsapp.png" alt="Whatsapp"></a>
+    </div>
+</footer>
+<script src="./js/home.js"></script>
+</body>
+</html>

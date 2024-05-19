@@ -3,7 +3,42 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
-    public void startGame(int attempts, int round ,int score, int generatedNumber) {
+    private static int attempts;
+    private static int round;
+    private static int score;
+    private static int generatedNumber;
+
+    public static void main(String[] args) {
+        play();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("[T]ry Again? or [Q]uit?");
+        String decision = scanner.next();
+
+        while (decision.equalsIgnoreCase("t")) {
+            if (decision.equalsIgnoreCase("q")) {
+                System.out.println("See you next time.");
+                break;
+            } else {
+                play();
+            }
+        }
+
+    }
+    private static void play() {
+        attempts = 1;
+        round = 1;
+        score = 0;
+        System.out.println("Welcome to the number guessing game.");
+        System.out.println("Aim of the game is for you, to guess the randomly generated number in 3 attempts");
+        startGame();
+    }
+    private static void numberGenerator() {
+        Random random = new Random();
+        int min = 1, max = 100;
+        generatedNumber = random.nextInt(min,max);
+    }
+    private static void startGame() {
         Random random = new Random();
         ArrayList<String> celebrationText = new ArrayList<>();
         celebrationText.add("Brilliant, amazing stuff!");
@@ -17,6 +52,7 @@ public class NumberGuessingGame {
 
 
         while (attempts <= 3) {
+            numberGenerator();
             int guess = scanner.nextInt();
             if (guess == generatedNumber) {
                 System.out.println(celebrationText.get((random.nextInt(0, celebrationText.size()))));
@@ -31,16 +67,15 @@ public class NumberGuessingGame {
                     round++;
                 }
                 if (score > 0) {
-                    System.out.println("Round " + round);
-                    System.out.println("Score " + score);
-                    startGame(attempts, round, score, generatedNumber);
+                    System.out.println("Welcome to round :" + round);
+                    System.out.println("Current score :" + score);
+                    startGame();
                 }
             } else if (guess > generatedNumber) {
                 System.out.println("Your guess is too high.");
                 if(attempts != 3) {System.out.println("Try again :");
                 } else {
                     System.out.println("Sorry, but you have ran out of attempts");
-//                    playAgain();
                 }
 
             } else {
@@ -48,7 +83,6 @@ public class NumberGuessingGame {
                 if(attempts != 3) {System.out.println("Try again :");
                 } else {
                     System.out.println("Sorry, but you have ran out of attempts");
-//                    playAgain();
                 }
 
             }
@@ -57,20 +91,4 @@ public class NumberGuessingGame {
         }
 
     }
-//    private void playAgain() {
-//        Random random = new Random();
-//        int min = 1, max =100;
-//        int attempts = 1, round = 1, score = 0, generatedNumber = random.nextInt(min, max);
-//
-//        Scanner scanner = new Scanner(System.in);
-//        String userDecision = scanner.nextLine();
-//        System.out.println("(P)lay? \t \t (Q)uit?");
-//
-//        if (userDecision.equalsIgnoreCase("P")) {
-//            startGame(attempts, round, score, generatedNumber);
-//        } else {
-//            System.out.println("Thank you for playing");
-//        }
-//    }
-
 }
