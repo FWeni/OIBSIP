@@ -1,4 +1,4 @@
-package io.fweni.app.util;
+package io.fweni.util;
 
 public class Strings {
     public static String capitaliseFirstLetter(String string) {

@@ -1,6 +1,6 @@
 package io.fweni.app.model;
 
-import io.fweni.app.util.Strings;
+import io.fweni.util.Strings;
 
 import java.util.Objects;
 

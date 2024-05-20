@@ -3,7 +3,7 @@ package io.fweni.app.db.memory;
 import com.google.common.collect.ImmutableList;
 import io.fweni.app.db.DataRepository;
 import io.fweni.app.model.Deposit;
-import io.fweni.app.model.Expense;
+import io.fweni.app.model.Transaction;
 import io.fweni.app.model.Person;
 import io.fweni.app.model.Withdraw;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class MemoryDb implements DataRepository {
     private final Set<Person> people = new HashSet<>();
-    private final Set<Expense> expenses = new HashSet<>();
+    private final Set<Transaction> expens = new HashSet<>();
     private final Set<Deposit> deposits = new HashSet<>();
     private final Set<Withdraw> withdrawals = new HashSet<>();
 
@@ -80,7 +80,7 @@ public class MemoryDb implements DataRepository {
      * @return
      */
     @Override
-    public Optional<Expense> findDeposit(UUID Id) {
+    public Optional<Transaction> findDeposit(UUID Id) {
         return Optional.empty();
     }
 
@@ -107,7 +107,7 @@ public class MemoryDb implements DataRepository {
      * @return
      */
     @Override
-    public Optional<Expense> findWithdrawal(UUID Id) {
+    public Optional<Transaction> findWithdrawal(UUID Id) {
         return Optional.empty();
     }
 
@@ -121,11 +121,11 @@ public class MemoryDb implements DataRepository {
     }
 
     /**
-     * @param expense 
+     * @param transaction
      * @return
      */
     @Override
-    public Expense addExpense(Expense expense) {
+    public Transaction addExpense(Transaction transaction) {
         return null;
     }
 
@@ -134,7 +134,7 @@ public class MemoryDb implements DataRepository {
      * @return
      */
     @Override
-    public Optional<Expense> findExpense(UUID Id) {
+    public Optional<Transaction> findExpense(UUID Id) {
         return Optional.empty();
     }
 
@@ -143,7 +143,7 @@ public class MemoryDb implements DataRepository {
      * @return
      */
     @Override
-    public ImmutableList<Expense> findAllExpenses(Person person) {
+    public ImmutableList<Transaction> findAllExpenses(Person person) {
         return null;
     }
     private void setTestData() {

@@ -3,7 +3,7 @@ package io.fweni.app.db;
 import com.google.common.collect.ImmutableList;
 import io.fweni.app.db.memory.MemoryDb;
 import io.fweni.app.model.Deposit;
-import io.fweni.app.model.Expense;
+import io.fweni.app.model.Transaction;
 import io.fweni.app.model.Person;
 import io.fweni.app.model.Withdraw;
 
@@ -23,15 +23,15 @@ public interface DataRepository {
     ImmutableList<Person> allPersons();
 
     Deposit depositFunds(Deposit deposit);
-    Optional<Expense> findDeposit(UUID Id);
+    Optional<Transaction> findDeposit(UUID Id);
     ImmutableList<Deposit> allDeposits(Person person);
 
     Withdraw withdrawFunds(Withdraw withdraw);
-    Optional<Expense> findWithdrawal(UUID Id);
+    Optional<Transaction> findWithdrawal(UUID Id);
     ImmutableList<Withdraw> allWithdrawals(Person person);
 
-    Expense addExpense(Expense expense);
-    Optional<Expense> findExpense(UUID Id);
-    ImmutableList<Expense> findAllExpenses(Person person);
+    Transaction addExpense(Transaction transaction);
+    Optional<Transaction> findExpense(UUID Id);
+    ImmutableList<Transaction> findAllExpenses(Person person);
 
 }
