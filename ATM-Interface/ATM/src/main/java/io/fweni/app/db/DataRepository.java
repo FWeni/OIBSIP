@@ -2,10 +2,7 @@ package io.fweni.app.db;
 
 import com.google.common.collect.ImmutableList;
 import io.fweni.app.db.memory.MemoryDb;
-import io.fweni.app.model.Deposit;
-import io.fweni.app.model.Transaction;
-import io.fweni.app.model.Person;
-import io.fweni.app.model.Withdraw;
+import io.fweni.app.model.*;
 
 import java.util.*;
 
@@ -22,16 +19,16 @@ public interface DataRepository {
     Optional<Person> findPerson( String email);
     ImmutableList<Person> allPersons();
 
-    Deposit depositFunds(Deposit deposit);
-    Optional<Transaction> findDeposit(UUID Id);
-    ImmutableList<Deposit> allDeposits(Person person);
-
-    Withdraw withdrawFunds(Withdraw withdraw);
-    Optional<Transaction> findWithdrawal(UUID Id);
-    ImmutableList<Withdraw> allWithdrawals(Person person);
-
-    Transaction addExpense(Transaction transaction);
-    Optional<Transaction> findExpense(UUID Id);
-    ImmutableList<Transaction> findAllExpenses(Person person);
+//    Deposit depositFunds(Deposit deposit);
+//    Optional<Deposit> findDeposit(UUID Id);
+//    ImmutableList<Deposit> allDeposits(Person person);
+//
+//    Withdraw withdrawFunds(Withdraw withdraw);
+//    Optional<Withdraw> findWithdrawal(UUID Id);
+//    ImmutableList<Withdraw> allWithdrawals(Person person);
+//
+//    Expense addExpense(Expense expense);
+//    Optional<Expense> findExpense(UUID Id);
+//    ImmutableList<Expense> findAllExpenses(Person person);
 
 }
