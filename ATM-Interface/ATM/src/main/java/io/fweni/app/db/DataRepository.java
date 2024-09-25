@@ -19,14 +19,16 @@ public interface DataRepository {
     Optional<Person> findPerson( String email);
     ImmutableList<Person> allPersons();
 
-//    Deposit depositFunds(Deposit deposit);
-//    Optional<Deposit> findDeposit(UUID Id);
-//    ImmutableList<Deposit> allDeposits(Person person);
-//
-//    Withdraw withdrawFunds(Withdraw withdraw);
-//    Optional<Withdraw> findWithdrawal(UUID Id);
-//    ImmutableList<Withdraw> allWithdrawals(Person person);
-//
+    Double depositFunds(Deposit deposit);
+    Optional<Deposit> findDeposit(UUID Id);
+    ImmutableList<Deposit> allDeposits(Person person);
+
+    Double withdrawFunds(Withdraw withdraw);
+    Optional<Withdraw> findWithdrawal(UUID Id);
+    ImmutableList<Withdraw> allWithdrawals(Person person);
+
+    Double getAccountBalance();
+
 //    Expense addExpense(Expense expense);
 //    Optional<Expense> findExpense(UUID Id);
 //    ImmutableList<Expense> findAllExpenses(Person person);

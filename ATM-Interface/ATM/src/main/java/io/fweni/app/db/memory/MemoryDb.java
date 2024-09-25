@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.fweni.app.db.DataRepository;
 import io.fweni.app.model.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class MemoryDb implements DataRepository {
     private final Set<Withdraw> withdrawals = new HashSet<>();
 
     volatile long lastPersonId = 0L;
+    private  double balance = 0.0;
 
     public MemoryDb() {
         setTestData();
@@ -89,64 +91,73 @@ public class MemoryDb implements DataRepository {
         return ImmutableList.copyOf(people);
     }
 
-//    /**
-//     * @param deposit
-//     * @return
-//     */
-//    @Override
-//    public Deposit depositFunds(Deposit deposit) {
-//        deposits.add(deposit);
-//        return deposit;
-//    }
-//
-//    /**
-//     * @param Id
-//     * @return
-//     */
-//    @Override
-//    public Optional<Deposit> findDeposit(UUID Id) {
-//        return deposits
-//                .stream()
-//                .filter(Deposit -> Deposit.getId()
-//                        .equals(Id)).findFirst();
-//    }
-//
-//    /**
-//     * @param person
-//     * @return
-//     */
-//    @Override
-//    public ImmutableList<Deposit> allDeposits(Person person) {
-//        return ImmutableList.copyOf(deposits);
-//    }
-//
-//    /**
-//     * @param withdraw
-//     * @return
-//     */
-//    @Override
-//    public Withdraw withdrawFunds(Withdraw withdraw) {
-//        return null;
-//    }
-//
-//    /**
-//     * @param Id
-//     * @return
-//     */
-//    @Override
-//    public Optional<Withdraw> findWithdrawal(UUID Id) {
-//        return Optional.empty();
-//    }
-//
-//    /**
-//     * @param person
-//     * @return
-//     */
-//    @Override
-//    public ImmutableList<Withdraw> allWithdrawals(Person person) {
-//        return ImmutableList.copyOf(withdrawals);
-//    }
-//
+    /**
+     * @param deposit
+     * @return
+     */
+    @Override
+    public Double depositFunds(Deposit deposit) {
+        deposits.add(deposit);
+        balance = balance + deposit.getAmount();
+        return balance;
+    }
+
+    /**
+     * @param Id
+     * @return
+     */
+    @Override
+    public Optional<Deposit> findDeposit(UUID Id) {
+        return deposits
+                .stream()
+                .filter(Deposit -> Deposit.getId()
+                        .equals(Id)).findFirst();
+    }
+
+    /**
+     * @param person
+     * @return
+     */
+    @Override
+    public ImmutableList<Deposit> allDeposits(Person person) {
+        return ImmutableList.copyOf(deposits);
+    }
+
+    /**
+     * @param withdraw
+     * @return
+     */
+    @Override
+    public Double withdrawFunds(Withdraw withdraw) {
+        if (withdraw.getAmount() > balance) {
+            return null;
+        }
+        withdrawals.add(withdraw);
+        return balance + withdraw.getAmount();
+    }
+
+    /**
+     * @param Id
+     * @return
+     */
+    @Override
+    public Optional<Withdraw> findWithdrawal(UUID Id) {
+        return Optional.empty();
+    }
+
+    /**
+     * @param person
+     * @return
+     */
+    @Override
+    public ImmutableList<Withdraw> allWithdrawals(Person person) {
+        return ImmutableList.copyOf(withdrawals);
+    }
+    public Double getAccountBalance() {
+        return balance;
+    }
+
+
 //    /**
 //     * @param Expense
 //     * @return
@@ -176,6 +187,21 @@ public class MemoryDb implements DataRepository {
     private void setTestData() {
         Person Refilwe = new Person("refilwe@testing.co.za");
         Person Thabo = new Person("thabo@testing.com");
+        addPerson(Refilwe);
+        addPerson(Thabo);
+
+        depositFunds(
+                new Deposit(
+                        Refilwe,
+                        Thabo,
+                        100.00,
+                        LocalDate.of(2024,06,02)));
+        withdrawFunds(
+                new Withdraw(
+                        50.00,
+                        LocalDate.of(2024,06,04)
+                )
+        );
 
 
     }

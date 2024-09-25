@@ -4,25 +4,26 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Withdraw extends TransactionModelBase{
-    private final Transaction transaction;
-    private final BusinessEntity withdrawalFrom;
+//    private final Transaction transaction;
+//    private final BusinessEntity withdrawalFrom;
     private final Double amount;
     private final LocalDate withdrawalDate;
 
     public Withdraw(
-            Transaction transaction,
-            BusinessEntity withdrawalFrom,
+//            Transaction transaction,
+//            BusinessEntity withdrawalFrom,
             Double amount,
             LocalDate withdrawalDate
     ) {
         super(UUID.randomUUID(), amount);
-        this.transaction = transaction;
-        this.withdrawalFrom = withdrawalFrom;
+//        this.transaction = transaction;
+//        this.withdrawalFrom = withdrawalFrom;
         this.amount = amount;
         this.withdrawalDate = withdrawalDate;
     }
 
     public LocalDate getWithdrawalDate() {
+        return LocalDate.now();
     }
 
     public boolean isWithdrawn() {

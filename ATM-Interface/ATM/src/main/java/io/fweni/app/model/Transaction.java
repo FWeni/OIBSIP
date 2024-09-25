@@ -30,7 +30,7 @@ public class Transaction extends TransactionModelBase {
         this.expenses = new HashSet<>();
     }
     public Withdraw createWithdrawal(
-            BusinessEntity withdrawalFrom,
+//            BusinessEntity withdrawalFrom,
             Double amount,
             LocalDate withdrawalDate
     ) {
@@ -42,8 +42,8 @@ public class Transaction extends TransactionModelBase {
         }
         Withdraw withdraw =
                 new Withdraw(
-                        this,
-                        withdrawalFrom,
+//                        this,
+//                        withdrawalFrom,
                         amount,
                         withdrawalDate
                 );
@@ -57,7 +57,7 @@ public class Transaction extends TransactionModelBase {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     public Deposit createDeposit(
-            BusinessEntity depositedAt,
+            Person depositedTo,
             Person depositedBy,
             Double depositedAmount,
             LocalDate depositedDate
@@ -70,9 +70,10 @@ public class Transaction extends TransactionModelBase {
         }
         Deposit deposit =
                 new Deposit(
-                        this,
+//                        this,
+                        depositedTo,
                         depositedBy,
-                        depositedAt,
+//                        depositedAt,
                         depositedAmount,
                         depositedDate
                 );
