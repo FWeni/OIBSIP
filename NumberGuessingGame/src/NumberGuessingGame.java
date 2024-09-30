@@ -8,22 +8,23 @@ public class NumberGuessingGame {
     private static int score;
     private static int generatedNumber;
 
+
     public static void main(String[] args) {
         play();
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("[T]ry Again? or [Q]uit?");
-        String decision = scanner.next();
-
-        while (decision.equalsIgnoreCase("t")) {
-            if (decision.equalsIgnoreCase("q")) {
-                System.out.println("See you next time.");
-                break;
-            } else {
+        try(Scanner scanner = new Scanner(System.in)) {
+            System.out.println("[T]ry again or [Q]uit?");
+            String decision = scanner.next();
+            while (decision.equalsIgnoreCase("t")) {
                 play();
+                if(decision.equalsIgnoreCase("q")) {
+                    System.out.println("See you next time!");
+                    break;
+                }
+                decision = "";
             }
+        } catch (Exception e) {
+            System.err.println("Invalid guess input!");
         }
-
     }
     private static void play() {
         attempts = 1;
@@ -59,7 +60,8 @@ public class NumberGuessingGame {
                 if (attempts == 1) {
                     score += 3;
                     round++;
-                } else if (attempts == 2) {
+                }
+                else if (attempts == 2) {
                     score += 2;
                     round++;
                 } else {
@@ -71,20 +73,24 @@ public class NumberGuessingGame {
                     System.out.println("Current score :" + score);
                     startGame();
                 }
-            } else if (guess > generatedNumber) {
+            }
+            else if (guess > generatedNumber) {
                 System.out.println("Your guess is too high.");
-                if(attempts != 3) {System.out.println("Try again :");
-                } else {
+                if(attempts < 3) {
+                    System.out.println("Try again :");
+                }
+                else {
                     System.out.println("Sorry, but you have ran out of attempts");
                 }
-
-            } else {
+            }
+            else {
                 System.out.println("Your guess is too low.");
-                if(attempts != 3) {System.out.println("Try again :");
-                } else {
+                if(attempts < 3) {
+                    System.out.println("Try again :");
+                }
+                else {
                     System.out.println("Sorry, but you have ran out of attempts");
                 }
-
             }
             attempts++;
 
